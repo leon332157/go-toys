@@ -1,0 +1,1 @@
+Check out the write up for this project on my personal site: [simple-shell-go](https://leon332157.is-a.dev/projects/simple-shell-go)
