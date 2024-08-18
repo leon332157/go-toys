@@ -47,9 +47,9 @@ func parseInput(line string) ProcessList {
 	if line == "" { // if this line is empty, return empty process list
 		return processList
 	}
-	cmd_indep := strings.Split(line, ";")
+	cmd_indep := strings.Split(line, ";") // independent command chains
 	for _, indep := range cmd_indep {
-		cmd_pipes := strings.Split(indep, "|")
+		cmd_pipes := strings.Split(indep, "|") // dependent command chains
 		for idx, dep_cmds := range cmd_pipes {
 			currProcess := Process{}
 			args := strings.Fields(dep_cmds)
@@ -84,7 +84,7 @@ func runCommands(command_list ProcessList) bool {
 	for _, currCmd := range command_list {
 		currExec := exec.Command(currCmd.Cmd, currCmd.Args...)
 
-		if currCmd.Cmd == "quit" {
+		if currCmd.Cmd == "quit" { // if any command is quit, break execution
 			is_quit = true
 			break
 		}
@@ -124,7 +124,9 @@ func runCommands(command_list ProcessList) bool {
 		if err != nil {
 			fmt.Printf("command %v wait failed %v\n", cmd.Args, err)
 		}
-		cmd.pipe_w.Close()
+		// close the write end and read end
+		cmd.pipe_w.Close() 
+		cmd.pipe_r.Close()
 	}
 
 	return is_quit
