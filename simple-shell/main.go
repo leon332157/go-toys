@@ -113,6 +113,7 @@ func runCommands(command_list ProcessList) bool {
 		err := currExec.Start()
 		if err != nil {
 			fmt.Printf("starting process %v failed %v", currExec.Args, err)
+			continue // if fails in the middle, skip this command
 		}
 		currCmd.execCmd = currExec
 		prev = &currCmd
