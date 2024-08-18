@@ -84,7 +84,8 @@ func runCommands(command_list ProcessList) bool {
 	for _, currCmd := range command_list {
 		currExec := exec.Command(currCmd.Cmd, currCmd.Args...)
 
-		if currCmd.Cmd == "quit" { // if any command is quit, break execution
+		if currCmd.Cmd == "quit" || currCmd.Cmd == "exit" { 
+			// break all execution
 			is_quit = true
 			break
 		}
